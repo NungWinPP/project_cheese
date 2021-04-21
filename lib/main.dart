@@ -5,6 +5,7 @@ import 'page/myCheese.dart';
 import 'page/myFavorite.dart';
 import 'page/profile.dart';
 import 'page/search.dart';
+import 'si_su.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFFFFC66C),
       ),
-      home: Home(),
+      home: Signin_Signup_Page(),
     );
   }
 }
