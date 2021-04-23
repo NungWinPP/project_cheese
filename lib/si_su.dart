@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:csc234_project_cheese/sign_in.dart';
+import 'package:csc234_project_cheese/sign_up.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -26,7 +28,7 @@ class SplashScreenState extends State<MyHomePage> {
   void initState() {
     super.initState();
     Timer(
-        Duration(seconds: 8),
+        Duration(seconds: 2),
         () => Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Sin_Sout_Page())));
   }
@@ -34,7 +36,7 @@ class SplashScreenState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(130),
+      padding: EdgeInsets.all(145),
       child: Image.asset(
         'images/cheese3.gif',
         width: 100,
@@ -59,27 +61,38 @@ class Sin_Sout_Page extends StatelessWidget {
                 width: 100,
                 height: 100,
               )),
+          SizedBox(
+            child: Container(
+              height: 100,
+            ),
+          ),
           ButtonBar(
-            buttonPadding: EdgeInsets.only(left: 25, right: 25),
+            buttonPadding: EdgeInsets.only(left: 50, right: 50),
             alignment: MainAxisAlignment.center,
             children: <Widget>[
               RaisedButton(
-                onPressed: () => {},
-                color: Color(0xffffc66c),
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(20.0)),
-                child: Text(
-                  'sign up',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-              RaisedButton(
-                onPressed: () => {},
+                onPressed: () => {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => SigninPage()))
+                },
                 color: Color(0xffffc66c),
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(20.0)),
                 child: Text(
                   'sign in',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+              RaisedButton(
+                onPressed: () => {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => SignupPage()))
+                },
+                color: Color(0xffffc66c),
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(20.0)),
+                child: Text(
+                  'sign up',
                   style: TextStyle(color: Colors.black),
                 ),
               ),
