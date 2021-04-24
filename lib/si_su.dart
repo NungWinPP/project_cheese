@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:csc234_project_cheese/sign_in.dart';
+import 'package:csc234_project_cheese/sign_up.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -34,11 +36,11 @@ class SplashScreenState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(150),
+      padding: EdgeInsets.all(145),
       child: Image.asset(
         'images/cheese3.gif',
-        width: 50,
-        height: 50,
+        width: 100,
+        height: 100,
       ),
       color: Color(0xFFFEF391),
     );
@@ -53,28 +55,44 @@ class Sin_Sout_Page extends StatelessWidget {
       child: Column(
         children: [
           Container(
-              margin: const EdgeInsets.only(top: 300, bottom: 35),
+              margin: const EdgeInsets.only(top: 300, bottom: 25),
               child: Image.asset(
                 'images/cheese.png',
                 width: 100,
                 height: 100,
               )),
+          SizedBox(
+            child: Container(
+              height: 100,
+            ),
+          ),
           ButtonBar(
+            buttonPadding: EdgeInsets.only(left: 50, right: 50),
             alignment: MainAxisAlignment.center,
             children: <Widget>[
               RaisedButton(
-                onPressed: () => {},
+                onPressed: () => {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => SigninPage()))
+                },
                 color: Color(0xffffc66c),
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(20.0)),
                 child: Text(
-                  'sign up',
+                  'sign in',
                   style: TextStyle(color: Colors.black),
                 ),
               ),
               RaisedButton(
-                onPressed: () => {},
+                onPressed: () => {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => SignupPage()))
+                },
                 color: Color(0xffffc66c),
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(20.0)),
                 child: Text(
-                  'sign in',
+                  'sign up',
                   style: TextStyle(color: Colors.black),
                 ),
               ),

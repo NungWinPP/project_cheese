@@ -6,6 +6,8 @@ import 'page/myFavorite.dart';
 import 'page/profile.dart';
 import 'page/search.dart';
 import 'si_su.dart';
+import 'sign_in.dart';
+import 'sign_up.dart';
 
 void main() {
   runApp(MyApp());
