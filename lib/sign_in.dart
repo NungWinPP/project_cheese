@@ -1,4 +1,6 @@
+import 'package:csc234_project_cheese/forgotpass.dart';
 import 'package:flutter/material.dart';
+import 'package:csc234_project_cheese/sign_up.dart';
 
 void main() {
   runApp(SigninPage());
@@ -58,7 +60,24 @@ class _SigninPageState extends State<SigninPage> {
             child: _txtEnterPassword,
           ),
           new Container(
-            margin: EdgeInsets.only(left: 100, right: 100, top: 10),
+              margin: EdgeInsets.only(top: 5, right: 40),
+              child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                new InkWell(
+                  child: new Text("Forgot password"),
+                  onTap: () => {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ForgotPassPage()))
+                  },
+                )
+              ])),
+          new Container(
+            margin: EdgeInsets.only(
+              left: 100,
+              right: 100,
+              top: 10,
+            ),
             child: new Row(
               children: <Widget>[
                 new Expanded(
@@ -72,7 +91,23 @@ class _SigninPageState extends State<SigninPage> {
                 ))
               ],
             ),
-          )
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Text("Do you have an account? "),
+            new InkWell(
+              child: new Text(
+                "Sign up.",
+                style: TextStyle(
+                  color: Colors.orange,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+              onTap: () => {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => SignupPage()))
+              },
+            )
+          ]),
         ],
       ),
       backgroundColor: Color(0xFFFEF391),

@@ -8,6 +8,8 @@ import 'page/search.dart';
 import 'si_su.dart';
 import 'sign_in.dart';
 import 'sign_up.dart';
+import 'forgotpass.dart';
+import 'getcode.dart';
 
 void main() {
   runApp(MyApp());
