@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
-import 'page/discover.dart';
-import 'page/myCheese.dart';
-import 'page/myFavorite.dart';
-import 'page/profile.dart';
-import 'page/search.dart';
 import 'si_su.dart';
-import 'sign_in.dart';
-import 'sign_up.dart';
+import 'uploadimage.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  var materialApp = MaterialApp(
+    home: MyApp(),
+    debugShowCheckedModeBanner: false,
+  );
+  runApp(materialApp);
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   // This widget is the root of your application.
   @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Cheese',
-      theme: ThemeData(
-        primaryColor: Color(0xFFFFC66C),
-      ),
-      home: Signin_Signup_Page(),
-    );
+    return UploadImagePage();
   }
 }
