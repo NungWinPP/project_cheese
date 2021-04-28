@@ -33,12 +33,18 @@ class _HomeState extends State<Home> {
       floatingActionButton: Transform.scale(
           scale: 1.3,
           child: FloatingActionButton(
-              backgroundColor: Color(0xFFFF6E37),
-              child: Icon(
-                Icons.add,
-                color: Colors.black,
-              ),
-              onPressed: () {})),
+            backgroundColor: Color(0xFFFF6E37),
+            child: Icon(
+              Icons.add,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              setState(() {
+                currentScreen = MyCheese();
+                currentTab = 5;
+              });
+            },
+          )),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
           color: Color(0xFFFEF391),
