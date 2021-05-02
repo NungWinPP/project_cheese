@@ -39,8 +39,8 @@ class SplashScreenState extends State<MyHomePage> {
       padding: EdgeInsets.all(145),
       child: Image.asset(
         'images/cheese3.gif',
-        width: 100,
-        height: 100,
+        width: 150,
+        height: 150,
       ),
       color: Color(0xFFFEF391),
     );
@@ -58,16 +58,17 @@ class Sin_Sout_Page extends StatelessWidget {
               margin: const EdgeInsets.only(top: 300, bottom: 25),
               child: Image.asset(
                 'images/cheese.png',
-                width: 100,
-                height: 100,
+                width: 150,
+                height: 150,
               )),
           SizedBox(
             child: Container(
-              height: 100,
+              height: 75,
             ),
           ),
           ButtonBar(
-            buttonPadding: EdgeInsets.only(left: 50, right: 50),
+            buttonPadding:
+                EdgeInsets.only(left: 90, right: 90, top: 10, bottom: 10),
             alignment: MainAxisAlignment.center,
             children: <Widget>[
               RaisedButton(
@@ -79,7 +80,7 @@ class Sin_Sout_Page extends StatelessWidget {
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(20.0)),
                 child: Text(
-                  'sign in',
+                  'Sign In',
                   style: TextStyle(color: Colors.black),
                 ),
               ),
@@ -92,7 +93,7 @@ class Sin_Sout_Page extends StatelessWidget {
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(20.0)),
                 child: Text(
-                  'sign up',
+                  'Sign Up',
                   style: TextStyle(color: Colors.black),
                 ),
               ),

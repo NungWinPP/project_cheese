@@ -16,7 +16,7 @@ class _SigninPageState extends State<SigninPage> {
   Widget build(BuildContext context) {
     final TextField _txtEnterMail = new TextField(
       decoration: new InputDecoration(
-        hintText: 'Enter Mail',
+        hintText: 'Email',
         contentPadding: new EdgeInsets.all(10.0),
         border: InputBorder.none,
       ),
@@ -24,7 +24,7 @@ class _SigninPageState extends State<SigninPage> {
     );
     final TextField _txtEnterPassword = new TextField(
       decoration: new InputDecoration(
-        hintText: 'Enter Password',
+        hintText: 'Password',
         contentPadding: new EdgeInsets.all(10.0),
         border: InputBorder.none,
       ),
@@ -35,8 +35,8 @@ class _SigninPageState extends State<SigninPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           new Container(
-            width: 100,
-            height: 100,
+            width: 150,
+            height: 150,
             child: new Image.asset(
               'images/cheese.png',
             ),
