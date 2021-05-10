@@ -67,8 +67,10 @@ class Sin_Sout_Page extends StatelessWidget {
             ),
           ),
           ButtonBar(
+
             buttonPadding:
                 EdgeInsets.only(left: 90, right: 90, top: 10, bottom: 10),
+
             alignment: MainAxisAlignment.center,
             children: <Widget>[
               RaisedButton(
