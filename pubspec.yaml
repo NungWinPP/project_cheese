@@ -34,7 +34,6 @@ dependencies:
   transparent_image: ^2.0.0
   cloud_firestore: ^1.0.6
   flappy_search_bar: 1.4.1
-
   flutter_datetime_picker: ^1.5.1
 
 

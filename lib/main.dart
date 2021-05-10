@@ -44,6 +44,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MyCheeseAdd();
+    return Sin_Sout_Page();
   }
 }

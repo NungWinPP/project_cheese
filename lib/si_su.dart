@@ -55,7 +55,7 @@ class Sin_Sout_Page extends StatelessWidget {
       child: Column(
         children: [
           Container(
-              margin: const EdgeInsets.only(top: 300, bottom: 25),
+              margin: const EdgeInsets.only(top: 200),
               child: Image.asset(
                 'images/cheese.png',
                 width: 150,
@@ -67,10 +67,8 @@ class Sin_Sout_Page extends StatelessWidget {
             ),
           ),
           ButtonBar(
-
             buttonPadding:
-                EdgeInsets.only(left: 90, right: 90, top: 10, bottom: 10),
-
+                EdgeInsets.only(left: 70, right: 70, top: 10, bottom: 10),
             alignment: MainAxisAlignment.center,
             children: <Widget>[
               RaisedButton(
