@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'auth.dart';
 
 void main() {
   runApp(SignupPage());
@@ -27,6 +28,11 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  final AuthService _auth = AuthService();
+
+  // text field state
+  String email = '';
+  String password = '';
   String _date = "Your Date of Birth";
 
   @override
@@ -48,8 +54,8 @@ class _SignupPageState extends State<SignupPage> {
       onPressed: () {
         DatePicker.showDatePicker(context,
             showTitleActions: true,
-            minTime: DateTime(2000, 1, 1),
-            maxTime: DateTime(2022, 12, 31),
+            minTime: DateTime(1921, 12, 31),
+            maxTime: DateTime(2021, 12, 31),
             theme: DatePickerTheme(
                 headerColor: Color(0xFFFEF391),
                 backgroundColor: Color.fromARGB(255, 240, 240, 240),
@@ -89,6 +95,9 @@ class _SignupPageState extends State<SignupPage> {
       ),
     );
     final TextField _txtEnterMail = new TextField(
+      onChanged: (val) {
+        setState(() => email = val);
+      },
       decoration: new InputDecoration(
         hintText: 'Your Email',
         contentPadding: new EdgeInsets.all(10.0),
@@ -97,6 +106,10 @@ class _SignupPageState extends State<SignupPage> {
       keyboardType: TextInputType.text,
     );
     final TextField _txtEnterPassword = new TextField(
+      obscureText: true,
+      onChanged: (val) {
+        setState(() => password = val);
+      },
       decoration: new InputDecoration(
         hintText: 'Your Password',
         contentPadding: new EdgeInsets.all(10.0),
@@ -117,8 +130,8 @@ class _SignupPageState extends State<SignupPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           new Container(
-            width: 150,
-            height: 150,
+            width: 50,
+            height: 50,
             child: new Image.asset(
               'images/cheese.png',
             ),
@@ -168,17 +181,20 @@ class _SignupPageState extends State<SignupPage> {
             child: new Row(
               children: <Widget>[
                 new Expanded(
-                    child: new RaisedButton(
-                  child: new Text("Sign Up"),
-                  textColor: Colors.black,
-                  color: Color(0xffffc66c),
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(20.0)),
-                  onPressed: () {},
-                ))
+                  child: new RaisedButton(
+                    child: new Text("Sign Up"),
+                    textColor: Colors.black,
+                    color: Color(0xffffc66c),
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(20.0)),
+                    onPressed: () async {
+                      await _auth.registerWithEmailAndPassword(email, password);
+                    },
+                  ),
+                )
               ],
             ),
-          )
+          ),
         ],
       ),
       backgroundColor: Color(0xFFFEF391),
