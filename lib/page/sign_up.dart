@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'auth.dart';
+import '../controllers/auth.dart';
 
 void main() {
   runApp(SignupPage());

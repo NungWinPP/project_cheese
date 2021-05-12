@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
-import 'si_su.dart';
-import 'sign_in.dart';
-import 'sign_up.dart';
-import 'forgotpass.dart';
-import 'getcode.dart';
-import 'uploadimage.dart';
+import 'page/home.dart';
+import 'page/si_su.dart';
+import 'page/sign_in.dart';
+import 'page/sign_up.dart';
+import 'page/forgotpass.dart';
+import 'page/getcode.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'mycheese_add.dart';
-import 'warpper.dart';
-import 'auth.dart';
+import 'page/mycheese_add.dart';
+import 'controllers/warpper.dart';
+import 'controllers/auth.dart';
 import 'package:provider/provider.dart';
-import 'user.dart';
+import 'controllers/user.dart';
 
 void main() async {
   Map<int, Color> color = {

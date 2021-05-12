@@ -1,6 +1,6 @@
-import 'package:csc234_project_cheese/dummy_data.dart';
+import 'package:csc234_project_cheese/models/dummy_data.dart';
 import 'package:flutter/material.dart';
-import 'package:csc234_project_cheese/cheese_item.dart';
+import 'package:csc234_project_cheese/components/cheese_item.dart';
 
 class Discover extends StatefulWidget {
   @override

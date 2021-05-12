@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:csc234_project_cheese/auth.dart';
+import 'package:csc234_project_cheese/controllers/auth.dart';
 
 class Profile extends StatefulWidget {
   @override

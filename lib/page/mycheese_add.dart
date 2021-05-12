@@ -1,5 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
-import 'add_image.dart';
+import 'package:path/path.dart' as Path;
 
 class MyCheeseAdd extends StatefulWidget {
   @override
@@ -9,13 +16,19 @@ class MyCheeseAdd extends StatefulWidget {
 class _MyCheeseAddState extends State<MyCheeseAdd> {
   String _chosenValue;
   String _chosenValue2;
+  File file;
+  firebase_storage.Reference ref;
+  CollectionReference imgRef;
 
   @override
   Widget build(BuildContext context) {
+    final fileName =
+        file != null ? Path.basename(file.path) : 'No File Selected';
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
+          onPressed: () {},
         ),
         title: Text("Add New Cheese"),
       ),
@@ -35,7 +48,7 @@ class _MyCheeseAddState extends State<MyCheeseAdd> {
                             child: Container(
                               height: 250,
                               width: 167,
-                              child: Text("Default"),
+                              child: Text("$fileName"),
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                   color: Color(0xFFFFC66C),
@@ -50,11 +63,9 @@ class _MyCheeseAddState extends State<MyCheeseAdd> {
                         child: Container(
                           alignment: Alignment.center,
                           child: InkWell(
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AddImage()),
-                            ),
+                            onTap: () {
+                              selectFile();
+                            },
                             child: Container(
                               height: 250,
                               width: 167,
@@ -230,12 +241,47 @@ class _MyCheeseAddState extends State<MyCheeseAdd> {
                       flex: 1,
                       child: SizedBox(),
                     ),
-                    Expanded(flex: 3, child: Center(child: Text('OK')))
+                    Expanded(
+                        flex: 3,
+                        child: Center(
+                            child: FlatButton(
+                          onPressed: () {
+                            uploadFile().whenComplete(
+                                () => Navigator.of(context).pop());
+                            ;
+                          },
+                          child: Text('OK'),
+                        )))
                   ],
                 ),
               ))
         ],
       ),
     );
+  }
+
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+    if (result == null) return;
+    final path = result.files.single.path;
+
+    setState(() => file = File(path));
+  }
+
+  Future uploadFile() async {
+    ref = firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('images/${Path.basename(file.path)}');
+    await ref.putFile(file).whenComplete(() async {
+      await ref.getDownloadURL().then((value) {
+        imgRef.add({'url': value});
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    imgRef = FirebaseFirestore.instance.collection('imageURLs');
   }
 }

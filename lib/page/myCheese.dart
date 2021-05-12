@@ -1,8 +1,7 @@
-import 'package:csc234_project_cheese/dummy_mycheese.dart';
+import 'package:csc234_project_cheese/models/dummy_mycheese.dart';
 import 'package:flutter/material.dart';
-import 'package:csc234_project_cheese/cheese_item.dart';
-import 'package:csc234_project_cheese/add_image.dart';
-import '../mycheese_add.dart';
+import 'package:csc234_project_cheese/components/cheese_item.dart';
+import 'mycheese_add.dart';
 
 class MyCheese extends StatefulWidget {
   @override
