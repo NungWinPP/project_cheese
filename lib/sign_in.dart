@@ -1,6 +1,7 @@
 import 'package:csc234_project_cheese/forgotpass.dart';
 import 'package:flutter/material.dart';
 import 'package:csc234_project_cheese/sign_up.dart';
+import 'auth.dart';
 
 void main() {
   runApp(SigninPage());
@@ -14,9 +15,18 @@ class SigninPage extends StatefulWidget {
 }
 
 class _SigninPageState extends State<SigninPage> {
+  final AuthService _auth = AuthService();
+
+  // text field state
+  String email = '';
+  String password = '';
+
   @override
   Widget build(BuildContext context) {
     final TextField _txtEnterMail = new TextField(
+      onChanged: (val) {
+        setState(() => email = val);
+      },
       decoration: new InputDecoration(
         hintText: 'Email',
         contentPadding: new EdgeInsets.all(10.0),
@@ -25,6 +35,10 @@ class _SigninPageState extends State<SigninPage> {
       keyboardType: TextInputType.text,
     );
     final TextField _txtEnterPassword = new TextField(
+      obscureText: true,
+      onChanged: (val) {
+        setState(() => password = val);
+      },
       decoration: new InputDecoration(
         hintText: 'Password',
         contentPadding: new EdgeInsets.all(10.0),
@@ -87,7 +101,9 @@ class _SigninPageState extends State<SigninPage> {
                   color: Color(0xffffc66c),
                   shape: new RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(20.0)),
-                  onPressed: () {},
+                  onPressed: () async {
+                    await _auth.signInWithEmailAndPassword(email, password);
+                  },
                 ))
               ],
             ),

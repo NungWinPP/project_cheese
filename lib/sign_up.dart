@@ -1,82 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'auth.dart';
 
 void main() {
   runApp(SignupPage());
 }
 
-class CustomPicker extends CommonPickerModel {
-  String digits(int value, int length) {
-    return '$value'.padLeft(length, "0");
-  }
-
-  CustomPicker({DateTime currentTime, LocaleType locale})
-      : super(locale: locale) {
-    this.currentTime = currentTime ?? DateTime.now();
-    this.setLeftIndex(this.currentTime.hour);
-    this.setMiddleIndex(this.currentTime.minute);
-    this.setRightIndex(this.currentTime.second);
-  }
-
+class DateTimePicker extends StatefulWidget {
   @override
-  String leftStringAtIndex(int index) {
-    if (index >= 0 && index < 24) {
-      return this.digits(index, 2);
-    } else {
-      return null;
-    }
-  }
+  _DateTimePickerState createState() => _DateTimePickerState();
+}
 
+class _DateTimePickerState extends State<DateTimePicker> {
   @override
-  String middleStringAtIndex(int index) {
-    if (index >= 0 && index < 60) {
-      return this.digits(index, 2);
-    } else {
-      return null;
-    }
-  }
-
-  @override
-  String rightStringAtIndex(int index) {
-    if (index >= 0 && index < 60) {
-      return this.digits(index, 2);
-    } else {
-      return null;
-    }
-  }
-
-  @override
-  String leftDivider() {
-    return "|";
-  }
-
-  @override
-  String rightDivider() {
-    return "|";
-  }
-
-  @override
-  List<int> layoutProportions() {
-    return [1, 2, 1];
-  }
-
-  @override
-  DateTime finalTime() {
-    return currentTime.isUtc
-        ? DateTime.utc(
-            currentTime.year,
-            currentTime.month,
-            currentTime.day,
-            this.currentLeftIndex(),
-            this.currentMiddleIndex(),
-            this.currentRightIndex())
-        : DateTime(
-            currentTime.year,
-            currentTime.month,
-            currentTime.day,
-            this.currentLeftIndex(),
-            this.currentMiddleIndex(),
-            this.currentRightIndex());
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
 
@@ -88,6 +28,18 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  final AuthService _auth = AuthService();
+
+  // text field state
+  String email = '';
+  String password = '';
+  String _date = "Your Date of Birth";
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final TextField _txtEnterName = new TextField(
@@ -98,35 +50,54 @@ class _SignupPageState extends State<SignupPage> {
       ),
       keyboardType: TextInputType.text,
     );
-    TextButton _txtEnterDateOfBirth = new TextButton(
-        onPressed: () {
-          DatePicker.showDatePicker(context,
-              showTitleActions: true,
-              minTime: DateTime(1921, 1, 1),
-              maxTime: DateTime(2021, 12, 31),
-              theme: DatePickerTheme(
-                  headerColor: Color(0xFFFEF391),
-                  backgroundColor: Color.fromARGB(255, 240, 240, 240),
-                  itemStyle: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 20),
-                  doneStyle: TextStyle(color: Colors.black, fontSize: 16)),
-              onChanged: (date) {
-            print('change $date in time zone ' +
-                date.timeZoneOffset.inHours.toString());
-          }, onConfirm: (date) {
-            print('confirm $date');
-          }, currentTime: DateTime.now(), locale: LocaleType.en);
-        },
-        child: Text(
-          'Your Date of Birth',
-          style: TextStyle(
-              color: Color(0xFF616161),
-              fontSize: 14,
-              fontWeight: FontWeight.normal),
-        ));
+    final TextButton _txtEnterDateOfBirth = new TextButton(
+      onPressed: () {
+        DatePicker.showDatePicker(context,
+            showTitleActions: true,
+            minTime: DateTime(1921, 12, 31),
+            maxTime: DateTime(2021, 12, 31),
+            theme: DatePickerTheme(
+                headerColor: Color(0xFFFEF391),
+                backgroundColor: Color.fromARGB(255, 240, 240, 240),
+                itemStyle: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 20),
+                doneStyle: TextStyle(color: Color(0xffffc66c), fontSize: 16)),
+            onConfirm: (date) {
+          print('confirm $date');
+          _date = '${date.year} - ${date.month} - ${date.day}';
+          setState(() {});
+        }, currentTime: DateTime.now(), locale: LocaleType.en);
+      },
+      child: Container(
+        child: Row(
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Container(
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        " $_date",
+                        style: TextStyle(
+                            color: Color(0xFF616161),
+                            fontWeight: FontWeight.normal,
+                            fontSize: 16.0),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
     final TextField _txtEnterMail = new TextField(
+      onChanged: (val) {
+        setState(() => email = val);
+      },
       decoration: new InputDecoration(
         hintText: 'Your Email',
         contentPadding: new EdgeInsets.all(10.0),
@@ -135,6 +106,10 @@ class _SignupPageState extends State<SignupPage> {
       keyboardType: TextInputType.text,
     );
     final TextField _txtEnterPassword = new TextField(
+      obscureText: true,
+      onChanged: (val) {
+        setState(() => password = val);
+      },
       decoration: new InputDecoration(
         hintText: 'Your Password',
         contentPadding: new EdgeInsets.all(10.0),
@@ -155,8 +130,8 @@ class _SignupPageState extends State<SignupPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           new Container(
-            width: 150,
-            height: 150,
+            width: 50,
+            height: 50,
             child: new Image.asset(
               'images/cheese.png',
             ),
@@ -170,7 +145,6 @@ class _SignupPageState extends State<SignupPage> {
             child: _txtEnterName,
           ),
           new Container(
-            padding: new EdgeInsets.only(right: 233),
             margin: new EdgeInsets.only(top: 10, left: 30, right: 30),
             decoration: new BoxDecoration(
                 color: Color.fromARGB(255, 240, 240, 240),
@@ -207,17 +181,20 @@ class _SignupPageState extends State<SignupPage> {
             child: new Row(
               children: <Widget>[
                 new Expanded(
-                    child: new RaisedButton(
-                  child: new Text("Sign Up"),
-                  textColor: Colors.black,
-                  color: Color(0xffffc66c),
-                  shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(20.0)),
-                  onPressed: () {},
-                ))
+                  child: new RaisedButton(
+                    child: new Text("Sign Up"),
+                    textColor: Colors.black,
+                    color: Color(0xffffc66c),
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(20.0)),
+                    onPressed: () async {
+                      await _auth.registerWithEmailAndPassword(email, password);
+                    },
+                  ),
+                )
               ],
             ),
-          )
+          ),
         ],
       ),
       backgroundColor: Color(0xFFFEF391),

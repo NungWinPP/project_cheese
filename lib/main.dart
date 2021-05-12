@@ -8,6 +8,10 @@ import 'getcode.dart';
 import 'uploadimage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'mycheese_add.dart';
+import 'warpper.dart';
+import 'auth.dart';
+import 'package:provider/provider.dart';
+import 'user.dart';
 
 void main() async {
   Map<int, Color> color = {
@@ -44,6 +48,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MyCheeseAdd();
+    return StreamProvider<Users>.value(
+      value: AuthService().user,
+      child: MaterialApp(
+        home: Wrapper(),
+      ),
+    );
   }
 }
