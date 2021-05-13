@@ -33,7 +33,6 @@ void main() async {
     theme: ThemeData(
       primarySwatch: colorCustom,
     ),
-    debugShowCheckedModeBanner: false,
   );
   runApp(materialApp);
 }

@@ -1,41 +1,127 @@
-import 'package:flutter/material.dart';
+import 'dart:ffi';
+import 'dart:io';
 
-class CategoryItem extends StatelessWidget {
-  final String id;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:csc234_project_cheese/models/cheese.dart';
+import 'package:csc234_project_cheese/page/pdf_viewer_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:csc234_project_cheese/controllers/pdf_api.dart';
+
+class CategoryItem extends StatefulWidget {
+  final String program;
   final String title;
   final String author;
-  const CategoryItem(this.id, this.title, this.author);
+  final String year;
+  final String pdfurl;
+  final String id;
+  final List favlist;
 
-  void selectCategory(BuildContext context) {
-    Navigator.of(context).pushNamed('/category-meals', arguments: {
-      'id': id,
-      'title': title,
+  const CategoryItem(this.program, this.year, this.title, this.author,
+      this.pdfurl, this.id, this.favlist);
+
+  @override
+  _CategoryItemState createState() => _CategoryItemState();
+}
+
+class _CategoryItemState extends State<CategoryItem> {
+  bool isfav = false;
+  Future<void> checkIsFav() async {
+    await Firebase.initializeApp().then((value) async {
+      FirebaseAuth.instance.authStateChanges().listen((event) async {
+        if (widget.favlist.contains(event.uid)) {
+          isfav = true;
+        } else {
+          isfav = false;
+        }
+        ;
+      });
+    });
+  }
+
+  clickFav() async {
+    await Firebase.initializeApp().then((value) async {
+      FirebaseAuth.instance.authStateChanges().listen((event) async {
+        print('hellooooooo');
+        if (isfav == false) {
+          try {
+            await FirebaseFirestore.instance
+                .collection("cheese")
+                .doc(widget.id)
+                .update({
+              "fav": FieldValue.arrayUnion(["${event.uid}"])
+            });
+          } catch (e) {
+            print('hiiiiiii        $e');
+          }
+          ;
+        } else {
+          try {
+            await FirebaseFirestore.instance
+                .collection("cheese")
+                .doc(widget.id)
+                .update({
+              "fav": FieldValue.arrayRemove(["${event.uid}"])
+            });
+          } catch (e) {
+            print('hiiiiiii        $e');
+          }
+        }
+        checkIsFav();
+      });
     });
   }
 
   @override
+  void initState() {
+    checkIsFav();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // return InkWell(
-    //     onTap: () => selectCategory(context),
-    //     splashColor: Theme.of(context).primaryColor,
-    //     borderRadius: BorderRadius.circular(15),
-    //     child: Container(
-    //       padding: EdgeInsets.all(5),
-    //       decoration: BoxDecoration(
-    //         image: DecorationImage(image: AssetImage('images/test.jpg')),
-    //       ),
-    //     ));
+    void openPDF(BuildContext context, File file) => Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => PDFViewerPage(file: file)));
 
     return InkWell(
-      onTap: () => print(context),
+      onTap: () async {
+        final url = widget.pdfurl;
+        print(url);
+        final file = await PDFApi.loadNetwork(url);
+        openPDF(context, file);
+      },
       child: Container(
+        padding: EdgeInsets.all(5),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(id),
-            Text(title),
-            Text("by " + author, style: TextStyle(color: Color(0xFFFF6E37)))
+            Align(
+              alignment: Alignment.topRight,
+              child: InkWell(
+                  child: isfav == false
+                      ? Icon(
+                          Icons.favorite_outline,
+                        )
+                      : Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        ),
+                  onTap: () {
+                    clickFav();
+                  }),
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.08),
+              child: Column(
+                children: [
+                  Text('${widget.program}#${widget.year}'),
+                  Text(widget.title),
+                  Text("by " + widget.author,
+                      style: TextStyle(color: Color(0xFFFF6E37)))
+                ],
+              ),
+            )
           ],
         ),
         decoration: BoxDecoration(

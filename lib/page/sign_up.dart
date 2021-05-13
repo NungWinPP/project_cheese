@@ -33,7 +33,7 @@ class _SignupPageState extends State<SignupPage> {
   // text field state
   String email = '';
   String password = '';
-  String _date = "Your Date of Birth";
+  String name = '';
 
   @override
   void initState() {
@@ -43,56 +43,15 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     final TextField _txtEnterName = new TextField(
+      onChanged: (val) {
+        setState(() => name = val);
+      },
       decoration: new InputDecoration(
         hintText: 'Your Name',
         contentPadding: new EdgeInsets.all(10.0),
         border: InputBorder.none,
       ),
       keyboardType: TextInputType.text,
-    );
-    final TextButton _txtEnterDateOfBirth = new TextButton(
-      onPressed: () {
-        DatePicker.showDatePicker(context,
-            showTitleActions: true,
-            minTime: DateTime(1921, 12, 31),
-            maxTime: DateTime(2021, 12, 31),
-            theme: DatePickerTheme(
-                headerColor: Color(0xFFFEF391),
-                backgroundColor: Color.fromARGB(255, 240, 240, 240),
-                itemStyle: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 20),
-                doneStyle: TextStyle(color: Color(0xffffc66c), fontSize: 16)),
-            onConfirm: (date) {
-          print('confirm $date');
-          _date = '${date.year} - ${date.month} - ${date.day}';
-          setState(() {});
-        }, currentTime: DateTime.now(), locale: LocaleType.en);
-      },
-      child: Container(
-        child: Row(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Container(
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        " $_date",
-                        style: TextStyle(
-                            color: Color(0xFF616161),
-                            fontWeight: FontWeight.normal,
-                            fontSize: 16.0),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ],
-        ),
-      ),
     );
     final TextField _txtEnterMail = new TextField(
       onChanged: (val) {
@@ -112,14 +71,6 @@ class _SignupPageState extends State<SignupPage> {
       },
       decoration: new InputDecoration(
         hintText: 'Your Password',
-        contentPadding: new EdgeInsets.all(10.0),
-        border: InputBorder.none,
-      ),
-      keyboardType: TextInputType.text,
-    );
-    final TextField _txtConfirmPassword = new TextField(
-      decoration: new InputDecoration(
-        hintText: 'Confirm Your Password',
         contentPadding: new EdgeInsets.all(10.0),
         border: InputBorder.none,
       ),
@@ -150,14 +101,6 @@ class _SignupPageState extends State<SignupPage> {
                 color: Color.fromARGB(255, 240, 240, 240),
                 borderRadius:
                     const BorderRadius.all(const Radius.circular(20))),
-            child: _txtEnterDateOfBirth,
-          ),
-          new Container(
-            margin: new EdgeInsets.only(top: 10, left: 30, right: 30),
-            decoration: new BoxDecoration(
-                color: Color.fromARGB(255, 240, 240, 240),
-                borderRadius:
-                    const BorderRadius.all(const Radius.circular(20))),
             child: _txtEnterMail,
           ),
           new Container(
@@ -167,14 +110,6 @@ class _SignupPageState extends State<SignupPage> {
                 borderRadius:
                     const BorderRadius.all(const Radius.circular(20))),
             child: _txtEnterPassword,
-          ),
-          new Container(
-            margin: new EdgeInsets.only(top: 10, left: 30, right: 30),
-            decoration: new BoxDecoration(
-                color: Color.fromARGB(255, 240, 240, 240),
-                borderRadius:
-                    const BorderRadius.all(const Radius.circular(20))),
-            child: _txtConfirmPassword,
           ),
           new Container(
             margin: EdgeInsets.only(left: 100, right: 100, top: 10),
@@ -188,7 +123,8 @@ class _SignupPageState extends State<SignupPage> {
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(20.0)),
                     onPressed: () async {
-                      await _auth.registerWithEmailAndPassword(email, password);
+                      await _auth.registerWithEmailAndPassword(
+                          email, password, name);
                     },
                   ),
                 )

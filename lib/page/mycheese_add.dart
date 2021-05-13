@@ -1,12 +1,11 @@
-import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as Path;
+import 'package:uuid/uuid.dart';
 
 class MyCheeseAdd extends StatefulWidget {
   @override
@@ -14,11 +13,13 @@ class MyCheeseAdd extends StatefulWidget {
 }
 
 class _MyCheeseAddState extends State<MyCheeseAdd> {
+  final myController = TextEditingController();
   String _chosenValue;
   String _chosenValue2;
   File file;
   firebase_storage.Reference ref;
   CollectionReference imgRef;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +27,6 @@ class _MyCheeseAddState extends State<MyCheeseAdd> {
         file != null ? Path.basename(file.path) : 'No File Selected';
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {},
-        ),
         title: Text("Add New Cheese"),
       ),
       body: Column(
@@ -113,6 +110,7 @@ class _MyCheeseAddState extends State<MyCheeseAdd> {
                                     child: Container(
                                         margin: EdgeInsets.only(left: 20),
                                         child: TextField(
+                                          controller: myController,
                                           decoration: new InputDecoration(
                                             filled: true,
                                             fillColor: Colors.white,
@@ -230,7 +228,7 @@ class _MyCheeseAddState extends State<MyCheeseAdd> {
                                         ),
                                         onChanged: (String value) {
                                           setState(() {
-                                            _chosenValue = value;
+                                            _chosenValue2 = value;
                                           });
                                         },
                                       ),
@@ -269,12 +267,26 @@ class _MyCheeseAddState extends State<MyCheeseAdd> {
   }
 
   Future uploadFile() async {
-    ref = firebase_storage.FirebaseStorage.instance
-        .ref()
-        .child('images/${Path.basename(file.path)}');
+    var uuid = Uuid();
+    var v1 = uuid.v1();
+    ref = firebase_storage.FirebaseStorage.instance.ref().child('images/${v1}');
     await ref.putFile(file).whenComplete(() async {
       await ref.getDownloadURL().then((value) {
-        imgRef.add({'url': value});
+        final User user = auth.currentUser;
+        final uid = user.uid;
+        final program = _chosenValue;
+        final year = _chosenValue2;
+        final title = Text(myController.text);
+        final username = user.displayName;
+        imgRef.add({
+          'author': username,
+          'url': value,
+          'user': uid,
+          'title': title.data,
+          'program': program,
+          'year': year,
+          'fav': []
+        });
       });
     });
   }
@@ -282,6 +294,13 @@ class _MyCheeseAddState extends State<MyCheeseAdd> {
   @override
   void initState() {
     super.initState();
-    imgRef = FirebaseFirestore.instance.collection('imageURLs');
+    imgRef = FirebaseFirestore.instance.collection('cheese');
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    myController.dispose();
+    super.dispose();
   }
 }
