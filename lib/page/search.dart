@@ -30,6 +30,7 @@ class _SearchState extends State<Search> {
 
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xFFFFC66C),
           title: Text("Search"),
         ),
         body: SafeArea(

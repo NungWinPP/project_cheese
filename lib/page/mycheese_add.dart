@@ -27,6 +27,7 @@ class _MyCheeseAddState extends State<MyCheeseAdd> {
         file != null ? Path.basename(file.path) : 'No File Selected';
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFFFFC66C),
         title: Text("Add New Cheese"),
       ),
       body: Column(

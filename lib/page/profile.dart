@@ -1,3 +1,4 @@
+import 'package:csc234_project_cheese/controllers/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final AuthService _auth = AuthService();
   final User user = FirebaseAuth.instance.currentUser;
   String _userId;
   Future<void> getUserId() async {
@@ -30,6 +32,15 @@ class _ProfileState extends State<Profile> {
         appBar: AppBar(
           title: Text("Profile"),
           backgroundColor: Color(0xFFFFC66C),
+          actions: <Widget>[
+            FlatButton.icon(
+              icon: Icon(Icons.person),
+              label: Text('logout'),
+              onPressed: () async {
+                await _auth.signOut();
+              },
+            ),
+          ],
         ),
         body: Container(
             width: double.infinity,
