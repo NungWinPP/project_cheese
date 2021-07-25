@@ -10,16 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:csc234_project_cheese/controllers/pdf_api.dart';
 
 class CategoryItem extends StatefulWidget {
-  final String program;
   final String title;
   final String author;
-  final String year;
   final String pdfurl;
   final String id;
   final List favlist;
 
-  const CategoryItem(this.program, this.year, this.title, this.author,
-      this.pdfurl, this.id, this.favlist);
+  const CategoryItem(
+      this.title, this.author, this.pdfurl, this.id, this.favlist);
 
   @override
   _CategoryItemState createState() => _CategoryItemState();
@@ -115,7 +113,6 @@ class _CategoryItemState extends State<CategoryItem> {
                   top: MediaQuery.of(context).size.height * 0.08),
               child: Column(
                 children: [
-                  Text('${widget.program}#${widget.year}'),
                   Text(widget.title),
                   Text("by " + widget.author,
                       style: TextStyle(color: Color(0xFFFF6E37)))

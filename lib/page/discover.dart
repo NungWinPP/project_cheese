@@ -82,8 +82,6 @@ class _DiscoverState extends State<Discover> {
                         MediaQuery.of(context).size.width * 0.05),
                     children: allCheeseList
                         .map((catData) => CategoryItem(
-                            catData.program,
-                            catData.year,
                             catData.title,
                             catData.author,
                             catData.url,

@@ -124,119 +124,6 @@ class _MyCheeseAddState extends State<MyCheeseAdd> {
                               ],
                             ))),
                     Expanded(
-                        flex: 2,
-                        child: Container(
-                            margin:
-                                EdgeInsets.only(left: 30, top: 20, right: 30),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: Text(
-                                    "Category",
-                                    style: TextStyle(fontSize: 15),
-                                  ),
-                                ),
-                                Expanded(
-                                    flex: 8,
-                                    child: Container(
-                                      margin: EdgeInsets.only(left: 20),
-                                      child: DropdownButton<String>(
-                                        focusColor: Colors.white,
-                                        value: _chosenValue,
-                                        //elevation: 5,
-                                        style: TextStyle(color: Colors.white),
-                                        iconEnabledColor: Colors.black,
-                                        items: <String>[
-                                          'ALL',
-                                          'IT',
-                                          'CS',
-                                          'DSI',
-                                          'GEN'
-                                        ].map<DropdownMenuItem<String>>(
-                                            (String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(
-                                              value,
-                                              style: TextStyle(
-                                                  color: Colors.black),
-                                            ),
-                                          );
-                                        }).toList(),
-                                        hint: Text(
-                                          "Choose a Category",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        onChanged: (String value) {
-                                          setState(() {
-                                            _chosenValue = value;
-                                          });
-                                        },
-                                      ),
-                                    ))
-                              ],
-                            ))),
-                    Expanded(
-                        flex: 2,
-                        child: Container(
-                            margin:
-                                EdgeInsets.only(left: 30, top: 20, right: 30),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: Text(
-                                    "Year",
-                                    style: TextStyle(fontSize: 15),
-                                  ),
-                                ),
-                                Expanded(
-                                    flex: 8,
-                                    child: Container(
-                                      margin: EdgeInsets.only(left: 20),
-                                      child: DropdownButton<String>(
-                                        focusColor: Colors.white,
-                                        value: _chosenValue2,
-                                        //elevation: 5,
-                                        style: TextStyle(color: Colors.white),
-                                        iconEnabledColor: Colors.black,
-                                        items: <String>[
-                                          '1',
-                                          '2',
-                                          '3',
-                                          '4',
-                                        ].map<DropdownMenuItem<String>>(
-                                            (String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(
-                                              value,
-                                              style: TextStyle(
-                                                  color: Colors.black),
-                                            ),
-                                          );
-                                        }).toList(),
-                                        hint: Text(
-                                          "Choose a Year",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        onChanged: (String value) {
-                                          setState(() {
-                                            _chosenValue2 = value;
-                                          });
-                                        },
-                                      ),
-                                    ))
-                              ],
-                            ))),
-                    Expanded(
                       flex: 1,
                       child: SizedBox(),
                     ),
@@ -275,8 +162,6 @@ class _MyCheeseAddState extends State<MyCheeseAdd> {
       await ref.getDownloadURL().then((value) {
         final User user = auth.currentUser;
         final uid = user.uid;
-        final program = _chosenValue;
-        final year = _chosenValue2;
         final title = Text(myController.text);
         final username = user.displayName;
         imgRef.add({
@@ -284,8 +169,6 @@ class _MyCheeseAddState extends State<MyCheeseAdd> {
           'url': value,
           'user': uid,
           'title': title.data,
-          'program': program,
-          'year': year,
           'fav': []
         });
       });

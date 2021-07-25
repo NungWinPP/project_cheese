@@ -142,9 +142,7 @@ class DatabaseService {
     return snapshot.docs.map((doc) {
       return Cheese(
           title: doc.data()['title'],
-          program: doc.data()['program'],
           url: doc.data()['url'],
-          year: doc.data()['year'],
           author: doc.data()['author'],
           uid: doc.data()['user'],
           id: doc.id,
@@ -167,9 +165,7 @@ class DatabaseService {
       querySnapshot.docs.forEach((doc) {
         Cheese c = new Cheese(
             title: doc.data()['title'],
-            program: doc.data()['program'],
             url: doc.data()['url'],
-            year: doc.data()['year'],
             author: doc.data()['author'],
             uid: doc.data()['user'],
             id: doc.id,
