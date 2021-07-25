@@ -1,4 +1,4 @@
-import 'package:csc234_project_cheese/si_su.dart';
+import 'package:csc234_project_cheese/page/si_su.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {

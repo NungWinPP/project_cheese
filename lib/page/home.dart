@@ -34,9 +34,12 @@ class _HomeState extends State<Home> {
           scale: 1.3,
           child: FloatingActionButton(
             backgroundColor: Color(0xFFFF6E37),
-            child: Icon(
-              Icons.add,
-              color: Colors.black,
+            child: Container(
+              margin: EdgeInsets.all(15),
+              child: Image.asset(
+                'images/cheese.png',
+                fit: BoxFit.contain,
+              ),
             ),
             onPressed: () {
               setState(() {
