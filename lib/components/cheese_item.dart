@@ -26,16 +26,17 @@ class CategoryItem extends StatefulWidget {
 class _CategoryItemState extends State<CategoryItem> {
   bool isfav = false;
   Future<void> checkIsFav() async {
-    await Firebase.initializeApp().then((value) async {
-      FirebaseAuth.instance.authStateChanges().listen((event) async {
-        if (widget.favlist.contains(event.uid)) {
-          isfav = true;
-        } else {
-          isfav = false;
-        }
-        ;
-      });
-    });
+    print("function _checkIsFav");
+    if (widget.favlist == null) {
+      isfav = false;
+      return;
+    }
+    var userID = FirebaseAuth.instance.currentUser.uid;
+    if (widget.favlist.contains(userID)) {
+      isfav = true;
+    } else {
+      isfav = false;
+    }
   }
 
   clickFav() async {
@@ -53,7 +54,6 @@ class _CategoryItemState extends State<CategoryItem> {
           } catch (e) {
             print('hiiiiiii        $e');
           }
-          ;
         } else {
           try {
             await FirebaseFirestore.instance

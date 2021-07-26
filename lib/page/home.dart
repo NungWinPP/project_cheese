@@ -2,8 +2,9 @@ import 'package:csc234_project_cheese/page/discover.dart';
 import 'package:csc234_project_cheese/page/myCheese.dart';
 import 'package:csc234_project_cheese/page/myFavorite.dart';
 import 'package:csc234_project_cheese/page/profile.dart';
-import 'package:csc234_project_cheese/page/search.dart';
 import 'package:flutter/material.dart';
+
+import 'maz_search.dart';
 
 class Home extends StatefulWidget {
   @override

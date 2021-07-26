@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'page/home.dart';
 import 'page/si_su.dart';
 import 'page/sign_in.dart';
@@ -28,7 +29,7 @@ void main() async {
   MaterialColor colorCustom = MaterialColor(0xFFFFC66C, color);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  var materialApp = MaterialApp(
+  var materialApp = GetMaterialApp(
     home: MyApp(),
     theme: ThemeData(
       primarySwatch: colorCustom,

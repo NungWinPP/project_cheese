@@ -1,3 +1,4 @@
+import 'package:csc234_project_cheese/components/fav_box.dart';
 import 'package:csc234_project_cheese/models/cheese.dart';
 import 'package:csc234_project_cheese/models/dummy_data.dart';
 import 'package:csc234_project_cheese/provider/database.dart';
@@ -81,12 +82,13 @@ class _DiscoverState extends State<Discover> {
                     padding: EdgeInsets.all(
                         MediaQuery.of(context).size.width * 0.05),
                     children: allCheeseList
-                        .map((catData) => CategoryItem(
-                            catData.title,
-                            catData.author,
-                            catData.url,
-                            catData.id,
-                            catData.fav))
+                        .map((catData) => FavBox(
+                              author: catData.author,
+                              favList: catData.fav,
+                              id: catData.id,
+                              title: catData.title,
+                              url: catData.url,
+                            ))
                         .toList(),
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                         maxCrossAxisExtent: 200,

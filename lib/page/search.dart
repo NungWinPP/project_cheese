@@ -1,45 +1,55 @@
-import 'package:flappy_search_bar/flappy_search_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:csc234_project_cheese/models/dummy_data.dart';
-import 'package:csc234_project_cheese/components/cheese_item.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:csc234_project_cheese/models/cheese.dart';
+// import 'package:flappy_search_bar/flappy_search_bar.dart';
+// import 'package:flutter/material.dart';
+// import 'package:csc234_project_cheese/models/dummy_data.dart';
+// import 'package:csc234_project_cheese/components/cheese_item.dart';
 
-class Search extends StatefulWidget {
-  @override
-  _SearchState createState() => _SearchState();
-}
+// class Search extends StatelessWidget {
+  
+//   @override
+//   Widget build(BuildContext context) {
+//     Future<List<Post>> search(String search) async {
+//       print("search: $search");
+//       var result = await FirebaseFirestore.instance
+//           .collection('cheese')
+//           .where(
+//             'title',
+//             isGreaterThanOrEqualTo: search,
+//             isLessThan: search.substring(0, search.length - 1) +
+//                 String.fromCharCode(search.codeUnitAt(search.length - 1) + 1),
+//           )
+//           .get();
+//       List<Cheese> cheeses = [];
+//       print("length result ${result.docs.length}");
 
-class Post {
-  final String title;
-  final String description;
+//       result.docs.forEach((cheese) {
+//         var data = cheese.data();
+//         cheeses.add(Cheese(author: data['author'], title: data['title']));
+//         print(data['author']);
+//       });
 
-  Post(this.title, this.description);
-}
+//       return List.generate(3, (int index) {
+//         return Post(
+//           "Title : sdsd",
+//           "Description : dsdsd",
+//         );
+//       });
+//     }
 
-class _SearchState extends State<Search> {
-  @override
-  Widget build(BuildContext context) {
-    Future<List<Post>> search(String search) async {
-      await Future.delayed(Duration(seconds: 2));
-      return List.generate(search.length, (int index) {
-        return Post(
-          "Title : $search $index",
-          "Description :$search $index",
-        );
-      });
-    }
-
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xFFFFC66C),
-          title: Text("Search"),
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: SearchBar(
-              onSearch: search,
-            ),
-          ),
-        ));
-  }
-}
+//     return Scaffold(
+//         appBar: AppBar(
+//           backgroundColor: Color(0xFFFFC66C),
+//           title: Text("Search"),
+//         ),
+//         body: SafeArea(
+//           child: Padding(
+//             padding: const EdgeInsets.all(20),
+//             child: SearchBar(
+//               onSearch: search,
+//               onItemFound: (Post item, int index) {},
+//             ),
+//           ),
+//         ));
+//   }
+// }
