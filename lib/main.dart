@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'page/home.dart';
-import 'page/si_su.dart';
-import 'page/sign_in.dart';
-import 'page/sign_up.dart';
-import 'page/forgotpass.dart';
-import 'page/getcode.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'page/mycheese_add.dart';
 import 'controllers/warpper.dart';
 import 'controllers/auth.dart';
 import 'package:provider/provider.dart';

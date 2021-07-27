@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 List<Cheese> myEventList;
 
 class Cheese {

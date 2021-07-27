@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:csc234_project_cheese/main.dart';
 import 'package:csc234_project_cheese/models/cheese.dart';
 
 class DatabaseService {

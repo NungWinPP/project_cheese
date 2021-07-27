@@ -1,5 +1,4 @@
 import 'package:csc234_project_cheese/models/cheese.dart';
-import 'package:csc234_project_cheese/models/dummy_mycheese.dart';
 import 'package:csc234_project_cheese/provider/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';

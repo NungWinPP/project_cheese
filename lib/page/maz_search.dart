@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:csc234_project_cheese/components/fav_box.dart';
 import 'package:csc234_project_cheese/models/cheese.dart';
-import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

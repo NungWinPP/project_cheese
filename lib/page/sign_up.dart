@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import '../controllers/auth.dart';
+import 'package:csc234_project_cheese/page/sign_in.dart';
 
 void main() {
   runApp(SignupPage());
@@ -81,8 +81,8 @@ class _SignupPageState extends State<SignupPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           new Container(
-            width: 50,
-            height: 50,
+            width: 150,
+            height: 150,
             child: new Image.asset(
               'images/cheese.png',
             ),
@@ -131,6 +131,22 @@ class _SignupPageState extends State<SignupPage> {
               ],
             ),
           ),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Text("Already have an account? "),
+            new InkWell(
+              child: new Text(
+                "Sign in.",
+                style: TextStyle(
+                  color: Colors.orange,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+              onTap: () => {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => SigninPage()))
+              },
+            )
+          ]),
         ],
       ),
       backgroundColor: Color(0xFFFEF391),

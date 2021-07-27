@@ -134,7 +134,6 @@ class _MyCheeseAddState extends State<MyCheeseAdd> {
                           onPressed: () {
                             uploadFile().whenComplete(
                                 () => Navigator.of(context).pop());
-                            ;
                           },
                           child: Text('OK'),
                         )))
