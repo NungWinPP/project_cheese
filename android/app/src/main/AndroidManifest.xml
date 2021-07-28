@@ -2,7 +2,7 @@
     package="com.example.csc234_project_cheese">
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
    <application
-        android:label="csc234_project_cheese"
+        android:label="Cheese"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
