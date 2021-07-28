@@ -1,6 +1,6 @@
-import 'package:csc234_project_cheese/page/forgotpass.dart';
+import 'forgotpass.dart';
 import 'package:flutter/material.dart';
-import 'package:csc234_project_cheese/page/sign_up.dart';
+import 'sign_up.dart';
 import '../controllers/auth.dart';
 
 void main() {

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:csc234_project_cheese/models/cheese.dart';
+import '../models/cheese.dart';
 
 class DatabaseService {
   final String uid;

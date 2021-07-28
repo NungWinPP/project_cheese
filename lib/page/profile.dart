@@ -1,4 +1,4 @@
-import 'package:csc234_project_cheese/controllers/auth.dart';
+import '../controllers/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

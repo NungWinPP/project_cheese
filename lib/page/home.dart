@@ -1,7 +1,7 @@
-import 'package:csc234_project_cheese/page/discover.dart';
-import 'package:csc234_project_cheese/page/myCheese.dart';
-import 'package:csc234_project_cheese/page/myFavorite.dart';
-import 'package:csc234_project_cheese/page/profile.dart';
+import 'discover.dart';
+import 'myCheese.dart';
+import 'myFavorite.dart';
+import 'profile.dart';
 import 'package:flutter/material.dart';
 
 import 'maz_search.dart';

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:csc234_project_cheese/controllers/pdf_api.dart';
-import 'package:csc234_project_cheese/page/pdf_viewer_page.dart';
+import '../controllers/pdf_api.dart';
+import '../page/pdf_viewer_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

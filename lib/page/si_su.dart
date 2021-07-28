@@ -1,7 +1,6 @@
 import 'dart:async';
-
-import 'package:csc234_project_cheese/page/sign_in.dart';
-import 'package:csc234_project_cheese/page/sign_up.dart';
+import 'sign_in.dart';
+import 'sign_up.dart';
 import 'package:flutter/material.dart';
 
 void main() {

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:csc234_project_cheese/components/fav_box.dart';
-import 'package:csc234_project_cheese/models/cheese.dart';
+import '../components/fav_box.dart';
+import '../models/cheese.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
